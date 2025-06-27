@@ -5,12 +5,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class UserStats {
     private int totalContactoClientes;
     private int motivoReclamo;
@@ -20,4 +22,5 @@ public class UserStats {
     private int motivoFelicitaciones;
     private int motivoCambio;
     private String hash;
+    private String timestamp;
 }

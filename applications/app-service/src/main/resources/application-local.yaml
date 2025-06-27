@@ -1,3 +1,17 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        domainEvents-out-0:
+          destination: event.stats.validated
+      rabbit:
+        bindings:
+          domainEvents-out-0:
+            producer:
+              routing-key-expression: '''event.stats.validated'''
+    function:
+      definition: domainEvents
+
 aws:
   region: "us-east-1"
   dynamodb:

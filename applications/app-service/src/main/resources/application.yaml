@@ -5,6 +5,9 @@ spring:
     name: "ms-muebles-sas"
   devtools:
     add-properties: false
+
+
+
   h2:
     console:
       enabled: true

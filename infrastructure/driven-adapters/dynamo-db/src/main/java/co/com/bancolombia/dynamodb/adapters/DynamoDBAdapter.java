@@ -8,6 +8,7 @@ import java.time.Instant;
 import lombok.extern.java.Log;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient;
 
 @Log
@@ -19,11 +20,9 @@ public class DynamoDBAdapter extends TemplateAdapterOperations<UserStats, String
         super(client, mapper, entity -> mapper.map(entity, UserStats.class), "user_stats");
     }
 
-    // Sobrescribes solo toEntity para inyectar timestamp automáticamente
     @Override
-    protected UserStatsEntity toEntity(UserStats stats) {
-        UserStatsEntity entity = mapper.map(stats, UserStatsEntity.class);
-        entity.setTimestamp(Instant.now().toString());
-        return entity;
+    public Mono<UserStats> save(UserStats stats) {
+        stats.setTimestamp(Instant.now().toString());
+        return super.save(stats);
     }
 }
