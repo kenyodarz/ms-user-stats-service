@@ -24,9 +24,9 @@ public class HashValidatorImpl implements HashValidator {
         );
 
         String expectedHash = DigestUtils.md5DigestAsHex(raw.getBytes(StandardCharsets.UTF_8));
-        log.info("RAW: {}", raw);
-        log.info("Expected: {}", expectedHash);
-        log.info("Received: {}", stats.getHash());
+        log.debug("RAW: {}", raw);
+        log.debug("Expected: {}", expectedHash);
+        log.debug("Received: {}", stats.getHash());
         return expectedHash.equals(stats.getHash());
     }
 }

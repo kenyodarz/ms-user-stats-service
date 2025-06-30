@@ -1,52 +1,35 @@
 package co.com.bancolombia.dynamodb.config;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient;
-import software.amazon.awssdk.metrics.MetricPublisher;
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockitoExtension.class)
 class DynamoDBConfigTest {
 
-    @Mock
-    private MetricPublisher publisher;
+    private final DynamoDBConfig config = new DynamoDBConfig();
 
-    @Mock
-    private DynamoDbAsyncClient dynamoDbAsyncClient;
+    @Test
+    void testLocalDynamoClient() {
+        DynamoDbAsyncClient client = config.localDynamoClient("http://localhost:8000", "us-east-1");
+        assertNotNull(client);
+    }
 
-    private final DynamoDBConfig dynamoDBConfig = new DynamoDBConfig();
+    @Test
+    void testCloudDynamoClient() {
+        DynamoDbAsyncClient client = config.cloudDynamoClient("us-east-1");
+        assertNotNull(client);
+    }
 
-//    @Test
-//    void testAmazonDynamoDB() {
-//
-//        DynamoDbAsyncClient result = dynamoDBConfig.amazonDynamoDB(
-//                "http://aws.dynamo.test",
-//                "region",
-//                publisher);
-//
-//        assertNotNull(result);
-//    }
-//
-//    @Test
-//    void testAmazonDynamoDBAsync() {
-//
-//        DynamoDbAsyncClient result = dynamoDBConfig.amazonDynamoDBAsync(
-//                publisher,
-//                "region");
-//
-//        assertNotNull(result);
-//    }
-//
-//
-//    @Test
-//    void testGetDynamoDbEnhancedAsyncClient() {
-//        DynamoDbEnhancedAsyncClient result = dynamoDBConfig.enhancedClient(dynamoDbAsyncClient);
-//
-//        assertNotNull(result);
-//    }
+    @Test
+    void testEnhancedClient() {
+        DynamoDbAsyncClient baseClient = config.localDynamoClient("http://localhost:8000",
+                "us-east-1");
+        DynamoDbEnhancedAsyncClient enhancedClient = config.enhancedClient(baseClient);
+        assertNotNull(enhancedClient);
+    }
 }
