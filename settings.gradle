@@ -12,7 +12,7 @@ buildCache {
     }
 }
 
-rootProject.name = 'ms-muebles-sas'
+rootProject.name = 'ms-user-stats-service'
 
 include ':app-service'
 include ':model'

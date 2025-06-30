@@ -19,6 +19,7 @@ public class SecurityHeadersConfig implements WebFilter {
     private static final String CACHE_CONTROL = "Cache-Control";
     private static final String PRAGMA = "Pragma";
     private static final String REFERRER_POLICY = "Referrer-Policy";
+    private static final String X_FRAME_OPTIONS = "X-Frame-Options";
 
     // Valores configurables
     @Value("${security.headers.content-security-policy:default-src 'self'; frame-ancestors 'self'; form-action 'self'}")
@@ -39,6 +40,9 @@ public class SecurityHeadersConfig implements WebFilter {
     @Value("${security.headers.referrer-policy:strict-origin-when-cross-origin}")
     private String referrerPolicy;
 
+    @Value("${security.headers.x-frame-options:DENY}")
+    private String xFrameOptions;
+
     @NonNull
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
@@ -49,6 +53,7 @@ public class SecurityHeadersConfig implements WebFilter {
         headers.set(STRICT_TRANSPORT_SECURITY, strictTransportSecurity);
         headers.set(X_CONTENT_TYPE_OPTIONS, xContentTypeOptions);
         headers.set(CACHE_CONTROL, cacheControl);
+        headers.set(X_FRAME_OPTIONS, xFrameOptions);
         headers.set(PRAGMA, pragmaValue);
         headers.set(REFERRER_POLICY, referrerPolicy);
 

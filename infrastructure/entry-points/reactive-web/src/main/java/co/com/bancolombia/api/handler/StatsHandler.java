@@ -1,4 +1,4 @@
-package co.com.bancolombia.api;
+package co.com.bancolombia.api.handler;
 
 import co.com.bancolombia.api.mapper.UserStatsMapper;
 import co.com.bancolombia.api.request.UserStatsRequest;
@@ -18,11 +18,16 @@ import reactor.core.publisher.Mono;
 
 @Component
 @RequiredArgsConstructor
-public class Handler {
+public class StatsHandler {
 
     private final ProcessStatsUseCase useCase;
 
     private final Validator validator;
+
+    public Mono<ServerResponse> getStatus() {
+        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(Map.of("status", "ok"));
+    }
 
     public Mono<ServerResponse> handleStats(ServerRequest request) {
         return request.bodyToMono(UserStatsRequest.class)

@@ -10,10 +10,9 @@ import com.openpojo.validation.rule.impl.SetterMustExistRule;
 import com.openpojo.validation.test.impl.GetterTester;
 import com.openpojo.validation.test.impl.SetterTester;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
-class EntityTest {
+class DomainEntityTest {
 
     private static final String POJO_PACKAGE = "co.com.bancolombia.model.stats";
 
@@ -30,7 +29,7 @@ class EntityTest {
                 .filter(pojoClass -> !pojoClass.getName().contains("Builder")
                         && !pojoClass.getClazz().isRecord()
                 )
-                .collect(Collectors.toList());
+                .toList();
 
         // Validar las clases POJO filtradas
         validator.validate(pojoClasses);

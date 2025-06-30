@@ -1,6 +1,6 @@
-package co.com.bancolombia.dynamodb.model;
+package co.com.bancolombia.api.model;
 
-import co.com.bancolombia.dynamodb.model.utils.IgnoreLocalDateTimeFilter;
+import co.com.bancolombia.api.model.utils.IgnoreLocalDateTimeFilter;
 import com.openpojo.reflection.PojoClass;
 import com.openpojo.reflection.impl.PojoClassFactory;
 import com.openpojo.validation.Validator;
@@ -12,9 +12,9 @@ import com.openpojo.validation.test.impl.SetterTester;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-class EntityTest {
+class ReactiveWebEntityTest {
 
-    private static final String POJO_PACKAGE = "co.com.bancolombia.dynamodb.model";
+    private static final String POJO_PACKAGE = "co.com.bancolombia.api.request";
 
     @Test
     void testPojoStructureAndBehavior() {

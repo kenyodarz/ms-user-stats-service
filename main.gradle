@@ -21,7 +21,7 @@ subprojects {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
-    //build.dependsOn 'pitest'
+    build.dependsOn 'pitest'
 
     test {
         useJUnitPlatform()
@@ -68,6 +68,7 @@ subprojects {
         timestampedReports = false
         //mutators = ['STRONGER', 'DEFAULTS']
         fileExtensionsToFilter.addAll('xml', 'orbit')
+        features = ["+CLASSLIMIT(limit[4])"]
         junit5PluginVersion = '1.2.2'
         failWhenNoMutations = false
         jvmArgs = ["-XX:+AllowRedefinitionToAddDeleteMethods"]

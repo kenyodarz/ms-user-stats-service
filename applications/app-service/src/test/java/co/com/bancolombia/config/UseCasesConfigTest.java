@@ -1,28 +1,26 @@
 package co.com.bancolombia.config;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mock;
+
+import co.com.bancolombia.model.events.gateways.EventsGateway;
+import co.com.bancolombia.model.stats.gateways.HashValidator;
+import co.com.bancolombia.model.stats.gateways.StatsRepository;
+import co.com.bancolombia.usecase.processstats.ProcessStatsUseCase;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class UseCasesConfigTest {
+class UseCasesConfigTest {
 
     @Test
-    void testUseCaseBeansExist() {
-        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestConfig.class)) {
-            String[] beanNames = context.getBeanDefinitionNames();
-
-            boolean useCaseBeanFound = false;
-            for (String beanName : beanNames) {
-                if (beanName.endsWith("UseCase")) {
-                    useCaseBeanFound = true;
-                    break;
-                }
-            }
-
-            assertTrue(useCaseBeanFound, "No beans ending with 'Use Case' were found");
+    void shouldLoadProcessStatsUseCaseBean() {
+        try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                TestConfig.class)) {
+            ProcessStatsUseCase useCase = context.getBean(ProcessStatsUseCase.class);
+            assertNotNull(useCase, "ProcessStatsUseCase bean should be loaded");
         }
     }
 
@@ -31,14 +29,18 @@ public class UseCasesConfigTest {
     static class TestConfig {
 
         @Bean
-        public MyUseCase myUseCase() {
-            return new MyUseCase();
+        public StatsRepository statsRepository() {
+            return mock(StatsRepository.class);
         }
-    }
 
-    static class MyUseCase {
-        public String execute() {
-            return "MyUseCase Test";
+        @Bean
+        public EventsGateway eventsGateway() {
+            return mock(EventsGateway.class);
+        }
+
+        @Bean
+        public HashValidator hashValidator() {
+            return mock(HashValidator.class);
         }
     }
 }
