@@ -6,6 +6,7 @@ buildscript {
 		jacocoVersion = '0.8.13'
 		pitestVersion = '1.15.0'
         lombokVersion = '1.18.38'
+        openpojoVersion = '0.9.1'
 	}
 }
 
