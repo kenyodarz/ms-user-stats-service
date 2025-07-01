@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import software.amazon.awssdk.auth.credentials.EnvironmentVariableCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
-import software.amazon.awssdk.auth.credentials.WebIdentityTokenFileCredentialsProvider;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
@@ -15,7 +15,7 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 public class DynamoDBConfig {
 
     @Bean
-    @Profile({"local", "pdn"})
+    @Profile("local")
     public DynamoDbAsyncClient localDynamoClient(
             @Value("${aws.dynamodb.endpoint}") String endpoint,
             @Value("${aws.region}") String region
@@ -28,12 +28,12 @@ public class DynamoDBConfig {
     }
 
     @Bean
-    @Profile({"dev", "cer"})
+    @Profile({"dev", "cer", "pdn"})
     public DynamoDbAsyncClient cloudDynamoClient(
             @Value("${aws.region}") String region
     ) {
         return DynamoDbAsyncClient.builder()
-                .credentialsProvider(WebIdentityTokenFileCredentialsProvider.create())
+                .credentialsProvider(EnvironmentVariableCredentialsProvider.create())
                 .region(Region.of(region))
                 .build();
     }
