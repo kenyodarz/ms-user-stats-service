@@ -7,7 +7,7 @@ services:
     startCommand: java -jar build/libs/ms-muebles-sas-*.jar
     envVars:
       - key: SPRING_PROFILES_ACTIVE
-        value: prod
+        value: pdn
 
       # AWS DynamoDB
       - key: AWS_REGION
