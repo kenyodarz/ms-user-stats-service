@@ -23,8 +23,6 @@ spring:
   h2:
     console:
       enabled: false
-  profiles:
-    active: "prod"
 
 aws:
   region: ${AWS_REGION:us-east-1}
