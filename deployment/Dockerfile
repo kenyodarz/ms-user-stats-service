@@ -2,6 +2,7 @@
 FROM gradle:8.5.0-jdk21-alpine AS build
 WORKDIR /app
 COPY --chown=gradle:gradle . .
+ENV DISABLE_VALIDATION=true
 RUN gradle bootJar --no-daemon --no-configuration-cache
 
 # Etapa 2: Imagen final
