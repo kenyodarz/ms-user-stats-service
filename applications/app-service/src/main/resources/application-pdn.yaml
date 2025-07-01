@@ -6,6 +6,12 @@ server:
 spring:
   application:
     name: "ms-muebles-sas"
+  rabbitmq:
+    host: ${RABBITMQ_HOST}
+    port: ${RABBITMQ_PORT:5671}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    queue: ${RABBITMQ_QUEUE:event.stats.validated}
   cloud:
     stream:
       bindings:

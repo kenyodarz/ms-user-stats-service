@@ -8,8 +8,8 @@ RUN chmod +x ./gradlew
 RUN ./gradlew clean bootJar -x test -x validateStructure --info
 
 # Mostrar todo lo que se generó
-RUN echo "=== ARCHIVOS JAR GENERADOS ===" && find /app -name "*.jar" -type f -exec ls -la {} \;
-RUN echo "=== CONTENIDO DE build/libs/ ===" && ls -la /app/build/libs/ || echo "Directorio build/libs no existe"
+#RUN echo "=== ARCHIVOS JAR GENERADOS ===" && find /app -name "*.jar" -type f -exec ls -la {} \;
+#RUN echo "=== CONTENIDO DE build/libs/ ===" && ls -la /app/build/libs/ || echo "Directorio build/libs no existe"
 
 # Stage 2: Runtime
 FROM amazoncorretto:21
