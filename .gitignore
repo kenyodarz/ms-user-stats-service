@@ -336,3 +336,8 @@ gradle-app.setting
 build-cache
 !.idea
 !/localstack/
+.idea/.name
+.idea/compiler.xml
+.idea/vcs.xml
+.idea/compiler.xml
+.idea/vcs.xml
