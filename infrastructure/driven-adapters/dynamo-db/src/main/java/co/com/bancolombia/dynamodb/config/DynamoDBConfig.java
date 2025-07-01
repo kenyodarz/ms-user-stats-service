@@ -1,5 +1,6 @@
 package co.com.bancolombia.dynamodb.config;
 
+import java.net.URI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,13 +11,11 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 
-import java.net.URI;
-
 @Configuration
 public class DynamoDBConfig {
 
     @Bean
-    @Profile("local")
+    @Profile({"local", "pdn"})
     public DynamoDbAsyncClient localDynamoClient(
             @Value("${aws.dynamodb.endpoint}") String endpoint,
             @Value("${aws.region}") String region
@@ -29,7 +28,7 @@ public class DynamoDBConfig {
     }
 
     @Bean
-    @Profile({"dev", "cer", "pdn"})
+    @Profile({"dev", "cer"})
     public DynamoDbAsyncClient cloudDynamoClient(
             @Value("${aws.region}") String region
     ) {
