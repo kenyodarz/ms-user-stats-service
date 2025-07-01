@@ -17,14 +17,14 @@ rootProject.name = 'ms-user-stats-service'
 include ':app-service'
 include ':model'
 include ':usecase'
-project(':app-service').projectDir = file('./applications/app-service')
-project(':model').projectDir = file('./domain/model')
-project(':usecase').projectDir = file('./domain/usecase')
+project(':app-service').projectDir = new File(rootDir, 'applications/app-service')
+project(':model').projectDir = new File(rootDir, 'domain/model')
+project(':usecase').projectDir = new File(rootDir, 'domain/usecase')
+project(':metrics').projectDir = new File(rootDir, 'infrastructure/helpers/metrics')
 include ':metrics'
-project(':metrics').projectDir = file('./infrastructure/helpers/metrics')
+project(':dynamo-db').projectDir = new File(rootDir, 'infrastructure/driven-adapters/dynamo-db')
 include ':dynamo-db'
-project(':dynamo-db').projectDir = file('./infrastructure/driven-adapters/dynamo-db')
+project(':async-event-bus').projectDir = new File(rootDir, 'infrastructure/driven-adapters/async-event-bus')
 include ':async-event-bus'
-project(':async-event-bus').projectDir = file('./infrastructure/driven-adapters/async-event-bus')
+project(':reactive-web').projectDir = new File(rootDir, 'infrastructure/entry-points/reactive-web')
 include ':reactive-web'
-project(':reactive-web').projectDir = file('./infrastructure/entry-points/reactive-web')
