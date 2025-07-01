@@ -29,9 +29,3 @@ bootJar {
     // Sets output jar name
     archiveFileName = "${project.getParent().getName()}.${archiveExtension.get()}"
 }
-
-if (System.getenv("DISABLE_VALIDATION") == "true") {
-    tasks.matching { it.name == "validateStructure" }.configureEach {
-        enabled = false
-    }
-}
