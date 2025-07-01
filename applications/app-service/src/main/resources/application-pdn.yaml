@@ -58,6 +58,9 @@ aws:
   region: ${AWS_REGION:us-east-1}
   dynamodb:
     endpoint: ${AWS_DYNAMODB_ENDPOINT:https://dynamodb.us-east-1.amazonaws.com}
+    access-key-id: ${AWS_ACCESS_KEY_ID}
+    secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+
 
 rabbitmq:
   host: ${RABBITMQ_HOST}
