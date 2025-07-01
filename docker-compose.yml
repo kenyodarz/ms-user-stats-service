@@ -1,4 +1,5 @@
 version: "3.9"
+
 services:
   dynamodb:
     image: amazon/dynamodb-local
@@ -14,10 +15,27 @@ services:
     container_name: rabbitmq
     ports:
       - "5672:5672"      # puerto AMQP
-      - "15672:15672"    # puerto de UI (http://localhost:15672)
+      - "15672:15672"    # UI (http://localhost:15672)
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - localnet
+
+  ms-user-stats-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-user-stats-service
+    depends_on:
+      - dynamodb
+      - rabbitmq
+    ports:
+      - "8080:8080"   # Cambia si tu app usa otro puerto
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DYNAMODB_ENDPOINT: http://dynamodb:8000
+      RABBITMQ_HOST: rabbitmq
     networks:
       - localnet
 
