@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: ms-muebles-sas
+    env: java
+    plan: free
+    buildCommand: ./gradlew clean build -x test
+    startCommand: java -jar build/libs/ms-muebles-sas-*.jar
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+
+      # AWS DynamoDB
+      - key: AWS_REGION
+        value: us-east-1
+      - key: AWS_DYNAMODB_ENDPOINT
+        value: https://dynamodb.us-east-1.amazonaws.com
+      - key: AWS_ACCESS_KEY_ID
+        sync: false
+      - key: AWS_SECRET_ACCESS_KEY
+        sync: false
+
+      # RabbitMQ (CloudAMQP)
+      - key: RABBITMQ_HOST
+        value: leopard.lmq.cloudamqp.com
+      - key: RABBITMQ_PORT
+        value: 5671
+      - key: RABBITMQ_USERNAME
+        value: azzlqyes
+      - key: RABBITMQ_PASSWORD
+        sync: false
+      - key: RABBITMQ_QUEUE
+        value: event.stats.validated
+
+      # CORS
+      - key: CORS_ALLOWED_ORIGINS
+        value: "*"
+
+    autoDeploy: false

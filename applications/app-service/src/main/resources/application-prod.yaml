@@ -6,13 +6,25 @@ server:
 spring:
   application:
     name: "ms-muebles-sas"
+  cloud:
+    stream:
+      bindings:
+        domainEvents-out-0:
+          destination: event.stats.validated
+      rabbit:
+        bindings:
+          domainEvents-out-0:
+            producer:
+              routing-key-expression: '''event.stats.validated'''
+    function:
+      definition: domainEvents
   devtools:
     add-properties: false
   h2:
     console:
-      enabled: false  # H2 solo en local
+      enabled: false
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:prod}
+    active: "prod"
 
 aws:
   region: ${AWS_REGION:us-east-1}
@@ -20,10 +32,10 @@ aws:
     endpoint: ${AWS_DYNAMODB_ENDPOINT:https://dynamodb.us-east-1.amazonaws.com}
 
 rabbitmq:
-  host: ${RABBITMQ_HOST:localhost}
-  port: ${RABBITMQ_PORT:5672}
-  username: ${RABBITMQ_USERNAME:guest}
-  password: ${RABBITMQ_PASSWORD:guest}
+  host: ${RABBITMQ_HOST}
+  port: ${RABBITMQ_PORT:5671}
+  username: ${RABBITMQ_USERNAME}
+  password: ${RABBITMQ_PASSWORD}
   queue: ${RABBITMQ_QUEUE:event.stats.validated}
 
 management:
@@ -37,4 +49,4 @@ management:
         enabled: true
 
 cors:
-  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:4200,http://localhost:8080}
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:*}
