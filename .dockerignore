@@ -1,0 +1,23 @@
+# Evita subir código compilado
+**/build/
+**/target/
+
+# Directorios de herramientas
+.gradle/
+.idea/
+.vscode/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Archivos de log
+*.log
+
+# Archivos temporales
+*.tmp
+*.swp
