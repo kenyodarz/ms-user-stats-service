@@ -15,16 +15,22 @@ buildCache {
 rootProject.name = 'ms-user-stats-service'
 
 include ':app-service'
-include ':model'
-include ':usecase'
 project(':app-service').projectDir = new File(rootDir, 'applications/app-service')
+
+include ':model'
 project(':model').projectDir = new File(rootDir, 'domain/model')
+
+include ':usecase'
 project(':usecase').projectDir = new File(rootDir, 'domain/usecase')
-project(':metrics').projectDir = new File(rootDir, 'infrastructure/helpers/metrics')
+
 include ':metrics'
-project(':dynamo-db').projectDir = new File(rootDir, 'infrastructure/driven-adapters/dynamo-db')
+project(':metrics').projectDir = new File(rootDir, 'infrastructure/helpers/metrics')
+
 include ':dynamo-db'
-project(':async-event-bus').projectDir = new File(rootDir, 'infrastructure/driven-adapters/async-event-bus')
+project(':dynamo-db').projectDir = new File(rootDir, 'infrastructure/driven-adapters/dynamo-db')
+
 include ':async-event-bus'
-project(':reactive-web').projectDir = new File(rootDir, 'infrastructure/entry-points/reactive-web')
+project(':async-event-bus').projectDir = new File(rootDir, 'infrastructure/driven-adapters/async-event-bus')
+
 include ':reactive-web'
+project(':reactive-web').projectDir = new File(rootDir, 'infrastructure/entry-points/reactive-web')
