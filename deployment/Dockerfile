@@ -6,6 +6,7 @@ RUN gradle bootJar --no-daemon --no-configuration-cache
 
 # Etapa 2: Imagen final
 FROM eclipse-temurin:21-jdk-alpine
-VOLUME /tmp
-COPY --from=build /app/app-service/build/libs/*.jar app.jar
+WORKDIR /app
+COPY --from=build /app/build/libs/ms-user-stats-service.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
