@@ -15,7 +15,8 @@ class DynamoDBConfigTest {
 
     @Test
     void testLocalDynamoClient() {
-        DynamoDbAsyncClient client = config.localDynamoClient("http://localhost:8000", "us-east-1");
+        DynamoDbAsyncClient client = config.localDynamoClient("http://localhost:8000", "us-east-1",
+                "key", "secret");
         assertNotNull(client);
     }
 
@@ -28,7 +29,7 @@ class DynamoDBConfigTest {
     @Test
     void testEnhancedClient() {
         DynamoDbAsyncClient baseClient = config.localDynamoClient("http://localhost:8000",
-                "us-east-1");
+                "us-east-1", "key", "secret");
         DynamoDbEnhancedAsyncClient enhancedClient = config.enhancedClient(baseClient);
         assertNotNull(enhancedClient);
     }
