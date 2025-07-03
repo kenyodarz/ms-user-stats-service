@@ -18,7 +18,7 @@ import software.amazon.awssdk.services.dynamodb.model.ScalarAttributeType;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@Profile("local") // Solo en entorno local
+@Profile({"local", "dev"})
 public class DynamoDBInitializer {
 
     private static final String TABLE_NAME = "user_stats";

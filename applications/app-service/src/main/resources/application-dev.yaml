@@ -1,4 +1,10 @@
 spring:
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+    queue: event.stats.validated
   cloud:
     stream:
       bindings:
@@ -15,16 +21,16 @@ spring:
 aws:
   region: "us-east-1"
   dynamodb:
-    endpoint: "http://localhost:8000"
+    endpoint: "http://dynamodb:8000"
+    access-key-id: "dummy"
+    secret-access-key: "dummy"
 
 rabbitmq:
-  host: localhost
+  host: rabbitmq
   port: 5672
   username: guest
   password: guest
   queue: event.stats.validated
-
-
 
 management:
   endpoints:
@@ -35,5 +41,6 @@ management:
     health:
       probes:
         enabled: true
+
 cors:
   allowed-origins: "http://localhost:4200,http://localhost:8080"

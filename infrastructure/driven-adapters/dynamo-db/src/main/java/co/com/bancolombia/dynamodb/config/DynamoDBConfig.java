@@ -18,7 +18,7 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient;
 public class DynamoDBConfig {
 
     @Bean
-    @Profile("local")
+    @Profile({"local", "dev"})
     public DynamoDbAsyncClient localDynamoClient(
             @Value("${aws.dynamodb.endpoint}") final String endpoint,
             @Value("${aws.region}") final String region,
@@ -40,7 +40,7 @@ public class DynamoDBConfig {
     }
 
     @Bean
-    @Profile({"dev", "cer", "pdn"})
+    @Profile({"cer", "pdn"})
     public DynamoDbAsyncClient cloudDynamoClient(
             @Value("${aws.region}") String region
     ) {
